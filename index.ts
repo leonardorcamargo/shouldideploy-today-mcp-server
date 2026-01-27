@@ -13,18 +13,19 @@ const server: any = new McpServer({
 
 server.tool("shouldideploy_today", {
   description:
-    "Consulta a API pública shouldideploy.today para saber se é uma boa ideia fazer deploy hoje.",
+    "Calls the public shouldideploy.today API to check if it is a good idea to deploy today.",
   inputSchema: {
     type: "object",
     properties: {
       tz: {
         type: "string",
         description:
-          "Timezone IANA (ex: America/Sao_Paulo, UTC). Se omitido, usa UTC.",
+          "IANA timezone (e.g., America/Sao_Paulo, UTC). If omitted, UTC is used.",
       },
       lang: {
         type: "string",
-        description: "Idioma da resposta (ex: en, el). Se omitido, usa en.",
+        description:
+          "Response language (e.g., en, el). If omitted, en is used.",
       },
     },
     required: [],
@@ -55,6 +56,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error("Erro ao iniciar MCP server:", err);
+  console.error("Error starting MCP server:", err);
   process.exit(1);
 });
