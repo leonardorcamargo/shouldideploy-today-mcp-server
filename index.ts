@@ -1,11 +1,12 @@
-const {
-  McpServer,
-} = require("@modelcontextprotocol/sdk/server/mcp");
-const {
-  StdioServerTransport,
-} = require("@modelcontextprotocol/sdk/server/stdio");
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
-const server = new McpServer({
+type ShouldIDeployArgs = {
+  tz?: string;
+  lang?: string;
+};
+
+const server: any = new McpServer({
   name: "shouldideploy-today-mcp-server",
   version: "1.0.0",
 });
@@ -28,15 +29,15 @@ server.tool("shouldideploy_today", {
     },
     required: [],
   },
-  async *invoke(args) {
-    const tz = args.tz || "UTC";
-    const lang = args.lang || "en";
+  async *invoke(args: ShouldIDeployArgs) {
+    const tz = args.tz ?? "UTC";
+    const lang = args.lang ?? "en";
 
-    const url = `https://orestislef.gr/shouldideploy/api.php?tz=${encodeURIComponent(
-      tz,
-    )}&lang=${encodeURIComponent(lang)}`;
+    const url = new URL("https://shouldideploy.today/api");
+    url.searchParams.set("tz", tz);
+    url.searchParams.set("lang", lang);
 
-    const response = await fetch(url);
+    const response = await fetch(url.toString());
     const text = await response.text();
 
     yield {
@@ -49,11 +50,11 @@ server.tool("shouldideploy_today", {
 
 async function main() {
   const transport = new StdioServerTransport();
-  await transport.connect(server);
+  await server.connect(transport);
+  console.error("Should I Deploy Today MCP Server running on stdio");
 }
 
 main().catch((err) => {
   console.error("Erro ao iniciar MCP server:", err);
   process.exit(1);
 });
-
