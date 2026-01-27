@@ -1,0 +1,29 @@
+{
+  "name": "shouldideploy-today-mcp-server",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "mcp-server",
+    "shouldideploytoday"
+  ],
+  "homepage": "https://github.com/leonardorcamargo/shouldideploy-today-mcp-server#readme",
+  "bugs": {
+    "url": "https://github.com/leonardorcamargo/shouldideploy-today-mcp-server/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leonardorcamargo/shouldideploy-today-mcp-server.git"
+  },
+  "license": "MIT",
+  "author": "Leonardo Camargo",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.25.3",
+    "zod": "^3.25.0"
+  }
+}
