@@ -2,6 +2,9 @@
   "name": "shouldideploy-today-mcp-server",
   "version": "1.0.0",
   "description": "",
+  "bin": {
+    "shouldideploy-today-mcp-server": "./dist/index.js"
+  },
   "keywords": [
     "mcp-server",
     "shouldideploytoday"
@@ -16,19 +19,25 @@
   },
   "license": "MIT",
   "author": "Leonardo Camargo",
-  "type": "commonjs",
+  "type": "module",
   "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && chmod 755 dist/index.js",
     "start": "npm run build && node dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.25.3",
     "zod": "^3.25.0"
   },
   "devDependencies": {
-    "@types/node": "^22.10.2",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.10.9",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.6",
     "typescript": "^5.7.2"
   }
 }
