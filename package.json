@@ -1,6 +1,6 @@
 {
   "name": "shouldideploy-today-mcp-server",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Simple MCP server that calls the shouldideploy.today API to tell you whether you should deploy today.",
   "bin": {
     "shouldideploy-today-mcp-server": "./dist/index.js"
