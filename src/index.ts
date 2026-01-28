@@ -15,8 +15,8 @@ server.registerTool('shouldideploy_today', {
     tz: z.string().optional().describe('IANA timezone (e.g., America/Sao_Paulo, UTC). If omitted, UTC is used.'),
     lang: z.string().optional().describe('Response language (e.g., en, el). If omitted, en is used.'),
   }
-}, async ({ tz, lang }) => {
-  const result = await makeRequest({ tz, lang });
+}, async (params) => {
+  const result = await makeRequest(params);
 
   if (!result) {
     return {
