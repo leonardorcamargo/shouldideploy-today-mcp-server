@@ -1,5 +1,4 @@
-shouldideploy-today-mcp-server
-================================
+# shouldideploy-today-mcp-server
 
 Simple MCP server that calls the public [`shouldideploy.today`](https://shouldideploy.today/) API to answer whether it is a good idea to deploy today.
 
@@ -8,7 +7,7 @@ Simple MCP server that calls the public [`shouldideploy.today`](https://shouldid
 - **Node.js** 18+ (20+ recommended)
 - **npm** 9+
 
-### Installation
+### Installation (from source)
 
 In the project directory:
 
@@ -24,13 +23,41 @@ npm start
 
 The server uses **stdio** as the transport (MCP default). Typically you do not call it directly; instead, you register it in an MCP client (such as Cursor, Claude Desktop, etc.).
 
+### Installation via npm
+
+Once published to npm, you can install the package globally:
+
+```bash
+npm install -g shouldideploy-today-mcp-server
+```
+
+This will make the `shouldideploy-today-mcp-server` binary available on your `PATH`.
+
+### Using with an MCP client
+
+Below is an example configuration snippet for a generic MCP client that supports process-based servers (adjust to your client's config format):
+
+```json
+{
+  "mcpServers": {
+    "shouldideploy-today": {
+      "type": "stdio",
+      "command": "shouldideploy-today-mcp-server",
+      "args": []
+    }
+  }
+}
+```
+
+After configuring and restarting your MCP client, you should see a tool named `shouldideploy_today` available.
+
 ### Available tool
 
-- **Name**: `shouldideploy_today`  
+- **Name**: `shouldideploy_today`
   - **Description**: Calls the `shouldideploy.today` API to check if it is a good idea to deploy today.
   - **Input (JSON)**:
-    - `tz` *(string, optional)*: IANA timezone, for example `America/Sao_Paulo` or `UTC`. Default: `UTC`.
-    - `lang` *(string, optional)*: response language, for example `en`. Default: `en`.
+    - `tz` _(string, optional)_: IANA timezone, for example `America/Sao_Paulo` or `UTC`. Default: `UTC`.
+    - `lang` _(string, optional)_: response language, for example `en`. Default: `en`.
   - **Output**: plain text returned by the API, for example something like “Yes, you should deploy today” or “No, you should not deploy today”.
 
 ### How it works
